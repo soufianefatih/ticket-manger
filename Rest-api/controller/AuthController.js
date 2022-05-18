@@ -7,12 +7,12 @@ dotenv.config();
 
 exports.register = async (req, res) => {
   let data = req.body;
+  res.json({ data: data });
   const newUser = await User.create({
     name: data.name,
     email: data.email,
-    password: bcrypt.hashSync(req.body.password, 8),
+    password: bcrypt.hashSync(data.password, 8),
   });
-
   try {
     res.json(newUser);
   } catch (err) {
